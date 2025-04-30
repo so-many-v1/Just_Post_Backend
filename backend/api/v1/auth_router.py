@@ -88,7 +88,9 @@ async def register_user(data:RegisterUser, session:AsyncSession = Depends(get_as
         email=data.email
     )
 
+    print("start send event")
     await register_producer.send_event(payload=event)
+    print("end send event")
 
 @router.post("/sing-in")
 async def login_user(data:LoginUser, session:AsyncSession = Depends(get_async_session)):
